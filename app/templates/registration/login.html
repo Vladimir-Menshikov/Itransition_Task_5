@@ -1,0 +1,40 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+    <div class="row">
+        <section id="loginForm">
+            <form method="post" class="form-horizontal">
+                {% csrf_token %}
+                <h2>
+                    Please, use the following form to log-in. If you don't have an
+                    account <a href="{% url "register" %}">register here</a>
+                </h2>
+                <hr />
+                <div class="form-group">
+                    <label for="id_username" class="col-md-2 control-label">User name</label>
+                    <div class="col-md-10">
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_password" class="col-md-2 control-label">Password</label>
+                    <div class="col-md-10">
+                        {{ form.password }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="hidden" name="next" value="/" />
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+                {% if form.errors %}
+                    <p class="validation-summary-errors">
+                        Your username and password didn't match.
+                        Please enter a correct user name and password.
+                    </p>
+                {% endif %}
+            </form>
+        </section>
+    </div>
+{% endblock %}
